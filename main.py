@@ -1,12 +1,12 @@
+import asyncio
 import logging
 import os
-import asyncio
-import sys
-
 from pathlib import Path
 
 import discord
 from discord.ext import commands
+
+from util import *
 
 log = logging.getLogger(__name__)
 bot = commands.Bot(
@@ -66,10 +66,6 @@ async def main():
 
 
 if __name__ == '__main__':
-    logging.basicConfig(
-        format='{asctime} - {lineno:>3} {filename:16} | {levelname:>7s} - {message}',
-        style='{',
-        level=logging.DEBUG,
-    )
-    logging.getLogger(sys.modules[__name__].__package__).setLevel(logging.DEBUG)
+    setup_loggers(log, logging.DEBUG)
+    setup_loggers("plugins", logging.DEBUG)
     asyncio.run(main())
